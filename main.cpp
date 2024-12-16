@@ -33,7 +33,7 @@ int main() {
         }
 
         x = rand() % gridSize+1;
-        y = rand() % gridSize+14;
+        y = rand() % gridSize+1;
 
         if(playerboard.attack(x, y)){
             cout << "CPU Hit!" << endl;
