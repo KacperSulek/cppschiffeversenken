@@ -81,7 +81,7 @@ void playerTurn(Board* computerBoard){
     // y = rand() % setGrid;
     cout << "Dein Zug! Gib die Koordinaten ein (x y): ";
     cin >> x >> y;
-    if(x > setGrid || y > setGrid){
+    if(x > setGrid || y > setGrid || x < 0 || y < 0){
         cout << "Fehler!!!" << endl;
         playerTurn(computerBoard);
     } else {
@@ -104,8 +104,6 @@ void computerTurn(Board& playerBoard){
         targets.pop_back();
     } else {
         do{
-            x = rand() % setGrid;
-            y = rand() % setGrid;
             do{
                 x = rand() % setGrid;
                 y = rand() % setGrid;
