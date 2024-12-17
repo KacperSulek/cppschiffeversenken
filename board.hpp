@@ -21,4 +21,4 @@ class Board{
         bool allShipSunk();
 };
 
-#endif  //INC_BOARD_HPP
+#endif
