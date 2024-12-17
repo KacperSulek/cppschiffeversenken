@@ -42,14 +42,14 @@ void Board::placeShip(int numShips)
 
 bool Board::attack(int x, int y)
 {
-    if (grid[x-1][y-1] == 'S')
+    if (grid[x][y] == 'S')
     {
-        grid[x-1][y-1] = 'X';
+        grid[x][y] = 'X';
         return true;
     }
-    else if (grid[x-1][y-1] == '~')
+    else if (grid[x][y] == '~')
     {
-        grid[x-1][y-1] = 'O';
+        grid[x][y] = 'O';
         return false;
     }
     else

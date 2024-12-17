@@ -43,6 +43,7 @@ int main() {
 
         if(playerboard.allShipSunk()){
             cout << "CPU Win!" << endl;
+            cpuboard.display();
             break;  
         }
     }
