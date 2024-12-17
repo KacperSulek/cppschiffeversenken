@@ -14,9 +14,11 @@ int main(){
     Board playerBoard;
     Board computerBoard;
 
-    for(int length = 1; length <= 3; ++length){
-        playerBoard.placeShip(playerBoard.generateRandomShip(length));
-        computerBoard.placeShip(computerBoard.generateRandomShip(length));
+    for(int i = 0; i < 2; ++i){
+        for(int length = 1; length <= 3; ++length){
+                playerBoard.placeShip(playerBoard.generateRandomShip(length));
+                computerBoard.placeShip(computerBoard.generateRandomShip(length));
+            }
     }
 
     bool gameOver = false;
@@ -48,7 +50,7 @@ void playerTurn(Board& computerBoard){
     int x, y;
     cout << "Dein Zug! Gib die Koordinaten ein (x y): ";
     cin >> x >> y;
-    if(computerBoard.attack(x-1, y-11)){
+    if(computerBoard.attack(x-1, y-1)){
         cout << "Treffer!\n";
     } else {
         cout << "Daneben!\n";
