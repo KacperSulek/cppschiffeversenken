@@ -1,10 +1,8 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include <vector>
+#include "config.hpp"
 #include "ship.hpp"
-
-using namespace std;
 
 class Board {
 public:

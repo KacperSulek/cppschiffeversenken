@@ -1,10 +1,7 @@
 #include "board.hpp"
-#include <iostream>
-#include <cstdlib>
+#include "config.hpp"
 
-using namespace std;
-
-int gridSize = 10;
+int gridSize = 15;
 
 Board::Board() : grid(gridSize, vector<char>(gridSize, '~')) {}
 
@@ -26,7 +23,15 @@ void Board::placeShip(Ship& ship){
 void Board::display(){
     for(auto& row : grid){
         for(char cell : row){
-            cout << cell << ' ';
+            if(cell == '~'){
+                cout << "\033[34m"<<cell<<"\033[0m" << ' ';
+            } else if(cell == 'S'){
+                cout << "\033[30m"<<cell<<"\033[0m" << ' ';
+            } else if(cell == 'X'){
+                cout << "\033[31m"<<cell<<"\033[0m" << ' ';
+            } else if(cell == 'O'){
+                cout << "\033[93m"<<cell<<"\033[0m" << ' ';
+            }
         }
         cout << endl;
     }
@@ -36,9 +41,17 @@ void Board::displayHidden(){
     for(auto& row : grid){
         for(char cell : row){
             if(cell == 'S'){
-                cout << "~ ";
+                cout << "\033[34m"<<"~ "<<"\033[0m";
             } else {
-                cout << cell << ' ';
+                if(cell == '~'){
+                    cout << "\033[34m"<<cell<<"\033[0m" << ' ';
+                } else if(cell == 'S'){
+                    cout << "\033[30m"<<cell<<"\033[0m" << ' ';
+                } else if(cell == 'X'){
+                    cout << "\033[31m"<<cell<<"\033[0m" << ' ';
+                } else if(cell == 'O'){
+                    cout << "\033[93m"<<cell<<"\033[0m" << ' ';
+                }
             }
         }
         cout << endl;

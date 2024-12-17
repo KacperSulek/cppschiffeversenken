@@ -1,3 +1,4 @@
+#include "config.hpp"
 #include "ship.hpp"
 
 Ship::Ship(int x, int y, int length, char orientation)

@@ -1,6 +1,8 @@
 #ifndef SHIP_H
 #define SHIP_H
 
+#include "config.hpp"
+
 class Ship {
 public:
     Ship(int x, int y, int length, char orientation);
