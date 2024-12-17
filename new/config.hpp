@@ -8,6 +8,7 @@
 #include <ctime>
 #include <conio.h>
 #include <Windows.h>
+#include <fstream>
 
 using namespace std;
 

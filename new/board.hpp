@@ -6,6 +6,7 @@
 
 class Board {
 public:
+    vector<vector<char>> grid;
     Board();
     void placeShip(Ship& ship);
     void display();
@@ -15,7 +16,6 @@ public:
     bool allShipsSunk();
 
 private:
-    vector<vector<char>> grid;
     bool canPlaceShip(int x, int y, int length, char orientation);
 };
 

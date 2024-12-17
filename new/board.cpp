@@ -1,7 +1,7 @@
 #include "board.hpp"
 #include "config.hpp"
 
-int setGrid = 15;
+int setGrid = 7;
 
 Board::Board() : grid(setGrid, vector<char>(setGrid, '~')) {}
 
