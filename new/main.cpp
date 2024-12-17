@@ -5,8 +5,6 @@
 void playerTurn(Board& computerBoard);
 void computerTurn(Board& playerBoard);
 
-
-
 int main(){
     srand(time(0));
 
@@ -17,9 +15,9 @@ int main(){
 
     for(int i = 0; i < 3; ++i){
         for(int length = 1; length <= 3; ++length){
-                playerBoard.placeShip(playerBoard.generateRandomShip(length));
-                computerBoard.placeShip(computerBoard.generateRandomShip(length));
-            }
+            playerBoard.placeShip(playerBoard.generateRandomShip(length));
+            computerBoard.placeShip(computerBoard.generateRandomShip(length));
+        }
     }
 
     bool gameOver = false;
@@ -43,7 +41,6 @@ int main(){
             break;
         }
     }
-
     return 0;
 }
 

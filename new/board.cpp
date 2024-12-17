@@ -72,7 +72,6 @@ Ship Board::generateRandomShip(int length){
             placed = true;
         }
     }
-
     return Ship(x, y, length, orientation);
 }
 
