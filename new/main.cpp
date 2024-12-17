@@ -23,7 +23,7 @@ bool wasAttempted(int x, int y){
     return false;
 }
 
-void addTargets(int x, int y) {
+void addTargets(int x, int y){
     if(x > 0 && !wasAttempted(x-1, y)) targets.push_back({x-1, y});
     if(x < 6 && !wasAttempted(x+1, y)) targets.push_back({x+1, y});
     if(y > 0 && !wasAttempted(x, y-1)) targets.push_back({x, y-1});
@@ -95,15 +95,15 @@ void playerTurn(Board* computerBoard){
     }
 }
 
-void computerTurn(Board& playerBoard) {
+void computerTurn(Board& playerBoard){
     int x, y;
-    if(!targets.empty()) {
+    if(!targets.empty()){
         Coordinate target = targets.back();
         x = target.x;
         y = target.y;
         targets.pop_back();
     } else {
-        do {
+        do{
             x = rand() % setGrid;
             y = rand() % setGrid;
             do{
