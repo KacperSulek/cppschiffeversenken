@@ -1,9 +1,9 @@
 #include "board.hpp"
 #include "config.hpp"
 
-int gridSize = 15;
+int setGrid = 15;
 
-Board::Board() : grid(gridSize, vector<char>(gridSize, '~')) {}
+Board::Board() : grid(setGrid, vector<char>(setGrid, '~')) {}
 
 void Board::placeShip(Ship& ship){
     int x = ship.getX();
@@ -65,8 +65,8 @@ Ship Board::generateRandomShip(int length){
 
     while(!placed){
         orientation = (rand() % 2) == 0 ? 'H' : 'V';
-        x = rand() % gridSize;
-        y = rand() % gridSize;
+        x = rand() % setGrid;
+        y = rand() % setGrid;
 
         if(canPlaceShip(x, y, length, orientation)){
             placed = true;
@@ -78,12 +78,12 @@ Ship Board::generateRandomShip(int length){
 
 bool Board::canPlaceShip(int x, int y, int length, char orientation){
     if(orientation == 'H'){
-        if(y + length > gridSize) return false;
+        if(y + length > setGrid) return false;
         for(int i = 0; i < length; ++i){
             if(grid[x][y + i] != '~') return false;
         }
     } else {
-        if(x + length > gridSize) return false;
+        if(x + length > setGrid) return false;
         for(int i = 0; i < length; ++i){
             if(grid[x + i][y] != '~') return false;
         }
@@ -95,7 +95,7 @@ bool Board::attack(int x, int y){
     if(grid[x][y] == 'S'){
         grid[x][y] = 'X';
         return true;
-    } else if (grid[x][y] == '~'){
+    } else if(grid[x][y] == '~'){
         grid[x][y] = 'O';
         return false;
     }
@@ -105,7 +105,7 @@ bool Board::attack(int x, int y){
 bool Board::allShipsSunk(){
     for(auto& row : grid){
         for(char cell : row){
-            if (cell == 'S'){
+            if(cell == 'S'){
                 return false;
             }
         }

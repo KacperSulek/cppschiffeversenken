@@ -5,8 +5,12 @@
 void playerTurn(Board& computerBoard);
 void computerTurn(Board& playerBoard);
 
+
+
 int main(){
     srand(time(0));
+
+    int setGrid = 15;
 
     Board playerBoard;
     Board computerBoard;
@@ -63,8 +67,8 @@ void playerTurn(Board& computerBoard){
 }
 
 void computerTurn(Board& playerBoard){
-    int x = rand() % 15;
-    int y = rand() % 15;
+    int x = rand() % setGrid;
+    int y = rand() % setGrid;
     cout << "Computer greift an: (" << x+1 << ", " << y+1 << ")\n";
     if(playerBoard.attack(x, y)){
         cout << "Computer hat getroffen!\n";
