@@ -33,13 +33,13 @@ void addTargets(int x, int y){
 int main(){
     srand(time(0));
 
-    int setGrid = 7;
+    int setGrid = 15;
 
     Board playerBoard;
     Board computerBoard;
 
     for(int i = 0; i < 3; ++i){
-        for(int length = 1; length <= 3; ++length){
+        for(int length = 3; length <= 7; ++length){
             playerBoard.placeShip(playerBoard.generateRandomShip(length));
             computerBoard.placeShip(computerBoard.generateRandomShip(length));
         }
@@ -82,7 +82,7 @@ void playerTurn(Board* computerBoard){
     cout << "Dein Zug! Gib die Koordinaten ein (x y): ";
     cin >> x >> y;
     if(x > setGrid || y > setGrid){
-        cout << "Fehler";
+        cout << "Fehler!!!" << endl;
         playerTurn(computerBoard);
     } else {
         if(computerBoard->attack(x-1, y-1)){
