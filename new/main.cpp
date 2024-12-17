@@ -14,9 +14,9 @@ vector<Coordinate> hits;
 vector<Coordinate> targets;
 vector<Coordinate> attempted;
 
-bool wasAttempted(int x, int y) {
-    for (auto& coord : attempted) {
-        if (coord.x == x && coord.y == y) {
+bool wasAttempted(int x, int y){
+    for(auto& coord : attempted){
+        if(coord.x == x && coord.y == y){
             return true;
         }
     }
@@ -24,15 +24,13 @@ bool wasAttempted(int x, int y) {
 }
 
 void addTargets(int x, int y) {
-    if (x > 0 && !wasAttempted(x-1, y)) targets.push_back({x-1, y});
-    if (x < 6 && !wasAttempted(x+1, y)) targets.push_back({x+1, y});
-    if (y > 0 && !wasAttempted(x, y-1)) targets.push_back({x, y-1});
-    if (y < 6 && !wasAttempted(x, y+1)) targets.push_back({x, y+1});
+    if(x > 0 && !wasAttempted(x-1, y)) targets.push_back({x-1, y});
+    if(x < 6 && !wasAttempted(x+1, y)) targets.push_back({x+1, y});
+    if(y > 0 && !wasAttempted(x, y-1)) targets.push_back({x, y-1});
+    if(y < 6 && !wasAttempted(x, y+1)) targets.push_back({x, y+1});
 }
 
 int main(){
-    
-
     srand(time(0));
 
     int setGrid = 7;
@@ -99,7 +97,7 @@ void playerTurn(Board* computerBoard){
 
 void computerTurn(Board& playerBoard) {
     int x, y;
-    if (!targets.empty()) {
+    if(!targets.empty()) {
         Coordinate target = targets.back();
         x = target.x;
         y = target.y;
@@ -113,12 +111,12 @@ void computerTurn(Board& playerBoard) {
                 y = rand() % setGrid;
             }
             while(playerBoard.grid[x][y] == 'O' || playerBoard.grid[x][y] == 'X');
-        } while (wasAttempted(x, y));
+        } while(wasAttempted(x, y));
     }
 
     cout << "Computer greift an: (" << x+1 << ", " << y+1 << ")\n";
     attempted.push_back({x, y});
-    if (playerBoard.attack(x, y)) {
+    if(playerBoard.attack(x, y)){
         cout << "Computer hat getroffen!\n";
         hits.push_back({x, y});
         addTargets(x, y);
