@@ -14,32 +14,16 @@ vector<Coordinate> hits;
 vector<Coordinate> targets;
 vector<Coordinate> attempted;
 
-bool wasAttempted(int x, int y){
-    for(auto& coord : attempted){
-        if(coord.x == x && coord.y == y){
-            return true;
-        }
-    }
-    return false;
-}
-
-void addTargets(int x, int y){
-    if(x > 0 && !wasAttempted(x-1, y)) targets.push_back({x-1, y});
-    if(x < 6 && !wasAttempted(x+1, y)) targets.push_back({x+1, y});
-    if(y > 0 && !wasAttempted(x, y-1)) targets.push_back({x, y-1});
-    if(y < 6 && !wasAttempted(x, y+1)) targets.push_back({x, y+1});
-}
-
 int main(){
     srand(time(0));
 
-    int setGrid = 15;
+    int gridSize = 9;
 
     Board playerBoard;
     Board computerBoard;
 
-    for(int i = 0; i < 3; ++i){
-        for(int length = 3; length <= 7; ++length){
+    for(int i = 0; i < 2; ++i){
+        for(int length = 2; length <= 3; ++length){
             playerBoard.placeShip(playerBoard.generateRandomShip(length));
             computerBoard.placeShip(computerBoard.generateRandomShip(length));
         }
@@ -81,7 +65,7 @@ void playerTurn(Board* computerBoard){
     // y = rand() % setGrid;
     cout << "Dein Zug! Gib die Koordinaten ein (x y): ";
     cin >> x >> y;
-    if(x > setGrid || y > setGrid || x < 0 || y < 0){
+    if(x > gridSize || y > gridSize || x < 0 || y < 0){
         cout << "Fehler!!!" << endl;
         playerTurn(computerBoard);
     } else {
@@ -95,6 +79,22 @@ void playerTurn(Board* computerBoard){
     }
 }
 
+bool wasAttempted(int x, int y){
+    for(auto& coord : attempted){
+        if(coord.x == x && coord.y == y){
+            return true;
+        }
+    }
+    return false;
+}
+
+void addTargets(int x, int y){
+    if(x > 6 && !wasAttempted(x-1, y)) targets.push_back({x-1, y});
+    if(x < gridSize-1 && !wasAttempted(x+1, y)) targets.push_back({x+1, y});
+    if(y > 6 && !wasAttempted(x, y-1)) targets.push_back({x, y-1});
+    if(y < gridSize-1 && !wasAttempted(x, y+1)) targets.push_back({x, y+1});
+}
+
 void computerTurn(Board& playerBoard){
     int x, y;
     if(!targets.empty()){
@@ -105,10 +105,9 @@ void computerTurn(Board& playerBoard){
     } else {
         do{
             do{
-                x = rand() % setGrid;
-                y = rand() % setGrid;
-            }
-            while(playerBoard.grid[x][y] == 'O' || playerBoard.grid[x][y] == 'X');
+                x = rand() % gridSize;
+                y = rand() % gridSize;
+            } while(playerBoard.grid[x][y] == 'O' || playerBoard.grid[x][y] == 'X');
         } while(wasAttempted(x, y));
     }
 
