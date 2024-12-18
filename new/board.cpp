@@ -3,7 +3,7 @@
 
 int gridSize = 9;
 
-Board::Board() : grid(gridSize, vector<char>(gridSize, '~')) {}
+Board::Board() : grid(gridSize, vector<char>(gridSize, '~')){}
 
 void Board::placeShip(Ship& ship){
     int x = ship.getX();
@@ -20,24 +20,24 @@ void Board::placeShip(Ship& ship){
     }
 }
 
-void Board::display() {
+void Board::display(){
     cout << "  ";
-    for (int i = 0; i < gridSize; ++i) {
+    for(int i = 0; i < gridSize; ++i){
         cout << i + 1 << ' ';
     }
     cout << endl;
 
-    for (int i = 0; i < gridSize; ++i) {
+    for(int i = 0; i < gridSize; ++i){
         cout << i + 1 << ' ';
-        for (int j = 0; j < gridSize; ++j) {
+        for(int j = 0; j < gridSize; ++j){
             char cell = grid[i][j];
-            if (cell == '~') {
+            if(cell == '~'){
                 cout << "\033[34m" << cell << "\033[0m" << ' ';
-            } else if (cell == 'S') {
+            } else if(cell == 'S'){
                 cout << "\033[30m" << cell << "\033[0m" << ' ';
-            } else if (cell == 'X') {
+            } else if(cell == 'X'){
                 cout << "\033[31m" << cell << "\033[0m" << ' ';
-            } else if (cell == 'O') {
+            } else if(cell == 'O'){
                 cout << "\033[93m" << cell << "\033[0m" << ' ';
             }
         }
@@ -45,25 +45,25 @@ void Board::display() {
     }
 }
 
-void Board::displayHidden() {
+void Board::displayHidden(){
     cout << "  ";
-    for (int i = 0; i < gridSize; ++i) {
+    for(int i = 0; i < gridSize; ++i){
         cout << i + 1 << ' ';
     }
     cout << endl;
 
-    for (int i = 0; i < gridSize; ++i) {
+    for(int i = 0; i < gridSize; ++i){
         cout << i + 1 << ' ';
-        for (int j = 0; j < gridSize; ++j) {
+        for(int j = 0; j < gridSize; ++j){
             char cell = grid[i][j];
-            if (cell == 'S') {
+            if(cell == 'S'){
                 cout << "\033[34m" << "~ " << "\033[0m";
             } else {
-                if (cell == '~') {
+                if(cell == '~'){
                     cout << "\033[34m" << cell << "\033[0m" << ' ';
-                } else if (cell == 'X') {
+                } else if(cell == 'X'){
                     cout << "\033[31m" << cell << "\033[0m" << ' ';
-                } else if (cell == 'O') {
+                } else if(cell == 'O'){
                     cout << "\033[93m" << cell << "\033[0m" << ' ';
                 }
             }
