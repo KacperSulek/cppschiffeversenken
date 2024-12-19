@@ -7,16 +7,16 @@
 class Board {
 public:
     vector<vector<char>> grid;
-    Board();
+    Board(int gridSize);
     void placeShip(Ship& ship);
-    void display();
-    void displayHidden();
-    Ship generateRandomShip(int length);
+    void display(int gridSize);
+    void displayHidden(int gridSize);
+    Ship generateRandomShip(int length, int gridSize);
     bool attack(int x, int y);
     bool allShipsSunk();
 
 private:
-    bool canPlaceShip(int x, int y, int length, char orientation);
+    bool canPlaceShip(int x, int y, int length, char orientation, int gridSize);
 };
 
 #endif

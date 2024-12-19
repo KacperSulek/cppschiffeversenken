@@ -1,9 +1,7 @@
 #include "board.hpp"
 #include "config.hpp"
 
-int gridSize = 9;
-
-Board::Board() : grid(gridSize, vector<char>(gridSize, '~')){}
+Board::Board(int gridSize) : grid(gridSize, vector<char>(gridSize, '~')){}
 
 void Board::placeShip(Ship& ship){
     int x = ship.getX();
@@ -20,7 +18,7 @@ void Board::placeShip(Ship& ship){
     }
 }
 
-void Board::display(){
+void Board::display(int gridSize){
     cout << "  ";
     for(int i = 0; i < gridSize; ++i){
         cout << i + 1 << ' ';
@@ -45,7 +43,7 @@ void Board::display(){
     }
 }
 
-void Board::displayHidden(){
+void Board::displayHidden(int gridSize){
     cout << "  ";
     for(int i = 0; i < gridSize; ++i){
         cout << i + 1 << ' ';
@@ -72,7 +70,7 @@ void Board::displayHidden(){
     }
 }
 
-Ship Board::generateRandomShip(int length){
+Ship Board::generateRandomShip(int length, int gridSize){
     char orientation;
     int x, y;
     bool placed = false;
@@ -82,14 +80,14 @@ Ship Board::generateRandomShip(int length){
         x = rand() % gridSize;
         y = rand() % gridSize;
 
-        if(canPlaceShip(x, y, length, orientation)){
+        if(canPlaceShip(x, y, length, orientation, gridSize)){
             placed = true;
         }
     }
     return Ship(x, y, length, orientation);
 }
 
-bool Board::canPlaceShip(int x, int y, int length, char orientation){
+bool Board::canPlaceShip(int x, int y, int length, char orientation, int gridSize){
     if(orientation == 'H'){
         if(y + length > gridSize) return false;
         for(int i = 0; i < length; ++i){

@@ -2,8 +2,8 @@
 #include "board.cpp"
 #include "ship.cpp"
 
-void playerTurn(Board* computerBoard);
-void computerTurn(Board& playerBoard);
+void playerTurn(Board* computerBoard, int gridSize);
+void computerTurn(Board& playerBoard, int gridSize);
 
 struct Coordinate {
     int x;
@@ -19,31 +19,31 @@ int main(){
 
     int gridSize = 9;
 
-    Board playerBoard;
-    Board computerBoard;
+    Board playerBoard(gridSize);
+    Board computerBoard(gridSize);    
 
     for(int i = 0; i < 2; ++i){
         for(int length = 2; length <= 3; ++length){
-            playerBoard.placeShip(playerBoard.generateRandomShip(length));
-            computerBoard.placeShip(computerBoard.generateRandomShip(length));
+            playerBoard.placeShip(playerBoard.generateRandomShip(length, gridSize));
+            computerBoard.placeShip(computerBoard.generateRandomShip(length, gridSize));
         }
     }
 
     bool gameOver = false;
     while(!gameOver){
         cout << "Dein Board:\n";
-        playerBoard.display();
+        playerBoard.display(gridSize);
         cout << "Computer's Board (verdeckt):\n";
-        computerBoard.displayHidden();
+        computerBoard.displayHidden(gridSize);
 
-        playerTurn(&computerBoard);
+        playerTurn(&computerBoard, gridSize);
         if(computerBoard.allShipsSunk()){
             cout << "Du hast gewonnen!\n";
             gameOver = true;
             break;
         }
 
-        computerTurn(playerBoard);
+        computerTurn(playerBoard, gridSize);
         if(playerBoard.allShipsSunk()){
             cout << "Der Computer hat gewonnen!\n";
             gameOver = true;
@@ -59,15 +59,13 @@ void clearScreen(){
     }
 }
 
-void playerTurn(Board* computerBoard){
+void playerTurn(Board* computerBoard, int gridSize){
     int x, y;
-    // x = rand() % setGrid;
-    // y = rand() % setGrid;
     cout << "Dein Zug! Gib die Koordinaten ein (x y): ";
     cin >> x >> y;
     if(x > gridSize || y > gridSize || x < 0 || y < 0){
         cout << "Fehler!!!" << endl;
-        playerTurn(computerBoard);
+        playerTurn(computerBoard, gridSize);
     } else {
         if(computerBoard->attack(x-1, y-1)){
             clearScreen();
@@ -88,14 +86,14 @@ bool wasAttempted(int x, int y){
     return false;
 }
 
-void addTargets(int x, int y){
+void addTargets(int x, int y, int gridSize){
     if(x > 6 && !wasAttempted(x-1, y)) targets.push_back({x-1, y});
     if(x < gridSize-1 && !wasAttempted(x+1, y)) targets.push_back({x+1, y});
     if(y > 6 && !wasAttempted(x, y-1)) targets.push_back({x, y-1});
     if(y < gridSize-1 && !wasAttempted(x, y+1)) targets.push_back({x, y+1});
 }
 
-void computerTurn(Board& playerBoard){
+void computerTurn(Board& playerBoard, int gridSize){
     int x, y;
     if(!targets.empty()){
         Coordinate target = targets.back();
@@ -116,7 +114,7 @@ void computerTurn(Board& playerBoard){
     if(playerBoard.attack(x, y)){
         cout << "Computer hat getroffen!\n";
         hits.push_back({x, y});
-        addTargets(x, y);
+        addTargets(x, y, gridSize);
     } else {
         cout << "Computer hat daneben geschossen!\n";
     }
